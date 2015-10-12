@@ -15,7 +15,7 @@ if (!isset($_SESSION['usuario_session']) && !isset($_SESSION['senha_session'])){
 <meta name="author" content="erick sutil">
 <!--<link rel="icon" href="">-->
 
-<title>Physiotherapy - Painel</title>
+<title>Physio - Painel</title>
 <link href="bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 <link href="css/sticky-footer-navbar.css" rel="stylesheet">

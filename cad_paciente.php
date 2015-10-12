@@ -15,7 +15,7 @@ if (!isset($_SESSION['usuario_session']) && !isset($_SESSION['senha_session'])){
 <meta name="author" content="erick sutil">
 <!--<link rel="icon" href="">-->
 
-<title>Physiotherapy - Efetuar Cadastro</title>
+<title>Physio - Efetuar Cadastro</title>
 <link href="bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 <link href="css/sticky-footer-navbar.css" rel="stylesheet">
@@ -38,14 +38,14 @@ if (!isset($_SESSION['usuario_session']) && !isset($_SESSION['senha_session'])){
       <div class="row">
         <div class="col-xs-6 col-md-4">
           <div class="form-group">
-            <label for="paciente">Nome:</label>
-            <input type="text" class="form-control" id="paciente" name="paciente" maxlength="50" required>
+            <label for="nome">Nome:</label>
+            <input type="text" class="form-control" id="nome" name="nome" maxlength="50" required>
           </div>
         </div>
         <div class="col-xs-6 col-md-2">
           <div class="form-group">
-            <label for="nascimento">Nascimento:</label>
-            <input type="date" class="form-control" id="nascimento" name="nascimento" required>
+            <label for="dataNascimento">Nascimento:</label>
+            <input type="date" class="form-control" id="dataNascimento" name="dataNascimento" required>
           </div>
         </div>
         <div class="col-xs-6 col-md-2">
@@ -60,12 +60,6 @@ if (!isset($_SESSION['usuario_session']) && !isset($_SESSION['senha_session'])){
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-6 col-md-4">
-          <div class="form-group">
-            <label for="profissao">Profissão:</label>
-            <input type="text" class="form-control" id="profissao" name="profissao" maxlength="50" required>
-          </div>
-        </div>
         <div class="col-xs-6 col-md-4">
           <div class="form-group">
             <label for="cpf">CPF:</label>
@@ -83,30 +77,24 @@ if (!isset($_SESSION['usuario_session']) && !isset($_SESSION['senha_session'])){
         <div class="col-xs-6 col-md-4">
           <div class="form-group">
             <label for="endereco">Endereço:</label>
-            <input type="text" class="form-control" id="endereco" name="endereco" maxlength="50" required>
+            <input type="text" class="form-control" id="rua" name="rua" maxlength="50" required>
           </div>
         </div>
-        <div class="col-xs-6 col-md-2">
-          <div class="form-group">
+           <div class="col-xs-1 col-md-2">
+       <div class="form-group">
             <label for="numero">Número:</label>
             <input type="number" class="form-control" id="numero" name="numero" maxlength="50" required>
           </div>
-        </div>
-        <div class="col-xs-6 col-md-2">
-          <div class="form-group">
+          </div>
+          <div class="col-xs-6 col-md-2">     
+            <div class="form-group">
             <label for="bairro">Bairro:</label>
             <input type="text" class="form-control" id="bairro" name="bairro" maxlength="50" required>
-          </div>
+            </div>  
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-6 col-md-1">
-          <div class="form-group">
-            <label for="uf">UF:</label>
-            <input type="text" class="form-control" id="uf" name="uf" maxlength="50" required>
-          </div>
-        </div>
-        <div class="col-xs-6 col-md-3">
+        <div class="col-xs-6 col-md-4">
           <div class="form-group">
             <label for="cep">CEP:</label>
             <input type="number" class="form-control" id="cep" name="cep" maxlength="50" required>
@@ -116,6 +104,12 @@ if (!isset($_SESSION['usuario_session']) && !isset($_SESSION['senha_session'])){
           <div class="form-group">
             <label for="cidade">Cidade:</label>
             <input type="text" class="form-control" id="cidade" name="cidade" maxlength="50" required>
+          </div>
+        </div>
+          <div class="col-xs-3 col-md-1">
+          <div class="form-group">
+            <label for="cep">UF:</label>
+            <input type="text" class="form-control" id="uf" name="uf" maxlength="50" required>
           </div>
         </div>
       </div>
@@ -133,22 +127,23 @@ if (!isset($_SESSION['usuario_session']) && !isset($_SESSION['senha_session'])){
 </html>
 <?php
 if(@$_GET['go'] == 'cadastrar'){
-    $paciente = $_POST['paciente'];
-	$nascimento = $_POST['nascimento'];
+    $nome = $_POST['nome'];
+	$dataNascimento = $_POST['dataNascimento'];
 	$sexo = $_POST['sexo'];
-	$profissao = $_POST['profissao'];
 	$cpf = $_POST['cpf'];
 	$rg = $_POST['rg'];
-	$endereco = $_POST['endereco'];
-	$numero = $_POST['numero'];
+	$rua = $_POST['rua'];
+    $numero = $_POST['numero'];
 	$bairro = $_POST['bairro'];
+    $cep = $_POST['cep'];
+    $cidade = $_POST['cidade'];
 	$uf = $_POST['uf'];
-	$cep = $_POST['cep'];
-	$cidade = $_POST['cidade'];
-	
-	mysql_query("insert into cadastro (paciente, nascimento, sexo, profissao, cpf, rg, endereco, numero, bairro, uf, cep, cidade) values 						               ('$paciente','$nascimento', '$sexo', '$profissao', '$cpf', '$rg', '$endereco', '$numero', '$bairro', '$uf', '$cep', '$cidade')");
+
+	mysql_query("insert into paciente (nome, dataNascimento, sexo, cpf, rg, rua, bairro, numero, cep, cidade, uf) values 						               ('$nome','$dataNascimento', '$sexo', '$cpf', '$rg', '$rua', '$bairro', '$numero', '$cep', '$cidade', '$uf')") or die(mysql_error());;
+    
+    mysql_query("insert into paciente p onner join usuario u inner join endereco e (u.nome, u.dataNascimento, u.sexo, u.cpf, u.rg, e.rua, e.bairro, e.numero, e.cep, e.cidade) values 						               ('$nome','$dataNascimento', '$sexo', '$cpf', '$rg', '$rua', '$bairro', '$numero', '$cep', '$cidade', '$uf')") or die(mysql_error());;
 	echo "<script>alert('Usuário cadastrado com sucesso.');</script>";
-	echo "<meta http-equiv='refresh' content='0, url=cadastrar_paciente.php'>";
+	/*echo "<meta http-equiv='refresh' content='0, url=cad_paciente.php'>"; */
 }
 ?>
 <?php 

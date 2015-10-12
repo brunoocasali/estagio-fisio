@@ -31,7 +31,7 @@ function UrlAtual(){
 <meta name="author" content="erick sutil">
 <!--<link rel="icon" href="">-->
 
-<title>Physiotherapy - Paciente</title>
+<title>Physio - Paciente</title>
 <link href="bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 <link href="css/sticky-footer-navbar.css" rel="stylesheet">

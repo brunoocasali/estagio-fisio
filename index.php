@@ -13,7 +13,7 @@ if (!isset($_SESSION['usuario_session']) && !isset($_SESSION['senha_session'])){
 <meta name="description" content="">
 <meta name="author" content="">
 <!--<link rel="icon" href="imagens/favicon.ico">-->
-<title>Login</title>
+<title>Physio - Login</title>
 
 <link href="bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="css/signin.css" rel="stylesheet">
