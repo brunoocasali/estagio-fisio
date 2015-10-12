@@ -30,8 +30,10 @@ if (!isset($_SESSION['usuario_session']) && !isset($_SESSION['senha_session'])){
 <body>
 <?php include('modulos/menu.php'); ?>
 <div class="container">
+<?php include('modulos/crumb.php'); ?>
   <h1>Buscar Paciente</h1>
-  <br />
+  <p>Nome e/ou sobrenome</p>
+  
   <form class="form-inline" method="GET" action="lista_paciente.php">
     <div class="form-group">
       <label for="buscar" class="sr-only"></label>

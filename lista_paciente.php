@@ -30,8 +30,8 @@ if (!isset($_SESSION['usuario_session']) && !isset($_SESSION['senha_session'])){
 <body>
 <?php include('modulos/menu.php'); ?>
 <div class="container">
+<?php include('modulos/crumb.php'); ?>
   <h1>Resultados</h1>
-  <br />
   <?php
 if (!isset($_GET['consulta'])) {
   header("Location: /");
@@ -39,9 +39,9 @@ if (!isset($_GET['consulta'])) {
 }
 require_once "modulos/conexao.php";
 $busca = mysql_real_escape_string($_GET['consulta']);
-$por_pagina = 1;
-$condicoes = "((`paciente` LIKE '%{$busca}%') OR ('%{$busca}%'))";
-$sql = "SELECT COUNT(*) AS total FROM `cadastro` WHERE {$condicoes}";
+$por_pagina = 5;
+$condicoes = "((`nome` LIKE '%{$busca}%') OR ('%{$busca}%'))";
+$sql = "SELECT COUNT(*) AS total FROM `paciente` WHERE {$condicoes}";
 $query = mysql_query($sql);
 $total = mysql_result($query, 0, 'total');
 $paginas =  (($total % $por_pagina) > 0) ? (int)($total / $por_pagina) + 1 : ($total / $por_pagina);
@@ -53,31 +53,31 @@ if (isset($_GET['pagina'])) {
 $pagina = max(min($paginas, $pagina), 1);
 $offset = ($pagina - 1) * $por_pagina;
 
-$sql = "SELECT * FROM `cadastro` WHERE {$condicoes} ORDER BY `paciente` DESC LIMIT {$offset}, {$por_pagina}";
+$sql = "SELECT * FROM `paciente` WHERE {$condicoes} ORDER BY `nome` DESC LIMIT {$offset}, {$por_pagina}";
 
 $query = mysql_query($sql);
-
 echo "Resultados ".min($total, ($offset + 1))." - ".min($total, ($offset + $por_pagina))." de ".$total." resultados encontrados para '".$_GET['consulta']."'";
-echo "<ul>";
+echo "<br />";echo "<br />";
+//echo "<ul>";
 
 while ($resultado = mysql_fetch_assoc($query)) {
-  $paciente = $resultado['paciente'];
-  $link = '/fisio/paciente.php?id=' . $resultado['id'];
-  
-  echo "<li>";
+  $nome = $resultado['nome'];
+  $link = '/estagio-fisio/exibe_paciente.php?id=' . $resultado['id'];
+ 
+ // echo "<li>";
     echo "<a href='{$link}'>";
-      echo "<h3>{$paciente}</h3>";
+      echo "<p><span class='glyphicon glyphicon-user' aria-hidden='true'></span> {$nome}</p>";
     echo "</a>";
-  echo "</li>";
+ // echo "</li>";
 }
-echo "</ul>";
+//echo "</ul>";
 
 echo '<nav>';
 echo   '<ul class="pagination">';
 
 if ($total > 0) {
   for ($n = 1; $n <= $paginas; $n++) {
-    echo "<li><a href='busca.php?consulta={$_GET['consulta']}&pagina={$n}'>{$n}</a></li>";
+    echo "<li><a href='pesq_paciente.php?consulta={$_GET['consulta']}&pagina={$n}'>{$n}</a></li>";
   }
 }
 

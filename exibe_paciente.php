@@ -7,10 +7,10 @@ if (!isset($_SESSION['usuario_session']) && !isset($_SESSION['senha_session'])){
 ?>
 <?php
 $id = $_GET['id'];
-$sql = "SELECT * FROM cadastro where id=$id;";
+$sql = "SELECT * FROM paciente where id=$id;";
 $query = mysql_query($sql);
 while($sql = mysql_fetch_array($query)){
-$paciente = $sql["paciente"];
+$nome = $sql["nome"];
 }
     
 function UrlAtual(){
@@ -46,7 +46,8 @@ function UrlAtual(){
 <body>
 <?php include('modulos/menu.php'); ?>
 <div class="container">
-  <h1><?php echo "$paciente"; ?></h1>
+<?php include('modulos/crumb.php'); ?>
+  <h1><?php echo "$nome"; ?></h1>
   <form action="exec_cad_imagem.php" method="POST" enctype="multipart/form-data">
     <strong>Anexar exames:</strong>
     <input type="file" class="" name="imagem"/>
@@ -67,18 +68,39 @@ mysql_connect($host,$username,$password) or die("Impossível conectar ao banco."
 
 @mysql_select_db($db) or die("Impossível conectar ao banco"); 
 
-$result=mysql_query("SELECT * FROM PESSOA WHERE IDUSUARIO LIKE $id") or die("Impossível executar a query"); 
+$result=mysql_query("SELECT * FROM consulta WHERE id_paciente LIKE $id") or die("Impossível executar a query"); 
 
 while($row=mysql_fetch_object($result)) { 
-	echo "
-          <div class='col-md-3' style='margin-bottom:10px;'>
-            <a href='getImagem.php?PicNum=$row->PES_ID' target=_blank>
-                <img src='getImagem.php?PicNum=$row->PES_ID' class='img-responsive img-rounded'\">
+	
+	echo "<div class='col-md-3' style='margin-bottom:10px;'>
+            <a href='modulos/getImagem.php?PicNum=$row->id' target=_blank>
+                <img src='modulos/getImagem.php?PicNum=$row->id' class='img-responsive img-rounded'\">
             </a>
-          </div>"; 
+          </div>";
 } 
 
 ?>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 </div>
 <?php include('modulos/footer.php'); ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 

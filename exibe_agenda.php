@@ -30,6 +30,7 @@ if (!isset($_SESSION['usuario_session']) && !isset($_SESSION['senha_session'])){
 <body>
 <?php include('modulos/menu.php'); ?>
 <div class="container">
+<?php include('modulos/crumb.php'); ?>
   <h1>Verificar Agenda</h1>
   <?php
 

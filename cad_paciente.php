@@ -19,6 +19,12 @@ if (!isset($_SESSION['usuario_session']) && !isset($_SESSION['senha_session'])){
 <link href="bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 <link href="css/sticky-footer-navbar.css" rel="stylesheet">
+<script type="text/javascript" src="js/cidades-estados-v0.2.js"></script>
+<script type="text/javascript">
+window.onload = function() {
+new dgCidadesEstados(document.getElementById('estado'), document.getElementById('cidade'), true);
+}
+</script>
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
@@ -30,9 +36,9 @@ if (!isset($_SESSION['usuario_session']) && !isset($_SESSION['senha_session'])){
 <body>
 <?php include('modulos/menu.php'); ?>
 <div class="container">
+<?php include('modulos/crumb.php'); ?>
   <h1>Efetuar Cadastro</h1>
   <p>Informações do Paciente</p>
-  <br />
   <div id="cadastro">
     <form method="post" action="?go=cadastrar">
       <div class="row">
@@ -40,6 +46,12 @@ if (!isset($_SESSION['usuario_session']) && !isset($_SESSION['senha_session'])){
           <div class="form-group">
             <label for="nome">Nome:</label>
             <input type="text" class="form-control" id="nome" name="nome" maxlength="50" required>
+          </div>
+        </div>
+        <div class="col-xs-6 col-md-4">
+          <div class="form-group">
+            <label for="profissao">Profissão:</label>
+            <input type="text" class="form-control" id="profissao" name="profissao" required>
           </div>
         </div>
         <div class="col-xs-6 col-md-2">
@@ -60,13 +72,21 @@ if (!isset($_SESSION['usuario_session']) && !isset($_SESSION['senha_session'])){
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-6 col-md-4">
+        <div class="col-xs-6 col-md-2">
+          <div class="form-group">
+            <label for="fone">Fone:</label>
+            <input type="number" class="form-control" id="fone" name="fone" maxlength="50" required>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6 col-md-2">
           <div class="form-group">
             <label for="cpf">CPF:</label>
             <input type="number" class="form-control" id="cpf" name="cpf" maxlength="50" required>
           </div>
         </div>
-        <div class="col-xs-6 col-md-4">
+        <div class="col-xs-6 col-md-2">
           <div class="form-group">
             <label for="rg">RG:</label>
             <input type="number" class="form-control" id="rg" name="rg" maxlength="50" required>
@@ -80,21 +100,21 @@ if (!isset($_SESSION['usuario_session']) && !isset($_SESSION['senha_session'])){
             <input type="text" class="form-control" id="rua" name="rua" maxlength="50" required>
           </div>
         </div>
-           <div class="col-xs-1 col-md-2">
-       <div class="form-group">
+        <div class="col-xs-4 col-md-2">
+          <div class="form-group">
             <label for="numero">Número:</label>
             <input type="number" class="form-control" id="numero" name="numero" maxlength="50" required>
           </div>
-          </div>
-          <div class="col-xs-6 col-md-2">     
-            <div class="form-group">
+        </div>
+        <div class="col-xs-6 col-md-2">
+          <div class="form-group">
             <label for="bairro">Bairro:</label>
             <input type="text" class="form-control" id="bairro" name="bairro" maxlength="50" required>
-            </div>  
+          </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-6 col-md-4">
+        <div class="col-xs-6 col-md-2">
           <div class="form-group">
             <label for="cep">CEP:</label>
             <input type="number" class="form-control" id="cep" name="cep" maxlength="50" required>
@@ -102,18 +122,21 @@ if (!isset($_SESSION['usuario_session']) && !isset($_SESSION['senha_session'])){
         </div>
         <div class="col-xs-6 col-md-4">
           <div class="form-group">
-            <label for="cidade">Cidade:</label>
-            <input type="text" class="form-control" id="cidade" name="cidade" maxlength="50" required>
+            <label for="estado">Estado:</label>
+            <select class="form-control" id="estado" name="estado">
+            </select>
           </div>
         </div>
-          <div class="col-xs-3 col-md-1">
+        <div class="col-xs-12 col-md-4">
           <div class="form-group">
-            <label for="cep">UF:</label>
-            <input type="text" class="form-control" id="uf" name="uf" maxlength="50" required>
+            <label for="cidade">Cidade:</label>
+            <select class="form-control" id="cidade" name="cidade">
+              <option disabled="yes" selected="selected">Selecione primeiro um estado</option>
+            </select>
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row"> <br />
         <button type="submit" class="btn center-block">Cadastrar</button>
       </div>
     </form>
@@ -128,8 +151,10 @@ if (!isset($_SESSION['usuario_session']) && !isset($_SESSION['senha_session'])){
 <?php
 if(@$_GET['go'] == 'cadastrar'){
     $nome = $_POST['nome'];
+	$profissao = $_POST['profissao'];
 	$dataNascimento = $_POST['dataNascimento'];
 	$sexo = $_POST['sexo'];
+	$fone = $_POST['fone'];
 	$cpf = $_POST['cpf'];
 	$rg = $_POST['rg'];
 	$rua = $_POST['rua'];
@@ -137,14 +162,22 @@ if(@$_GET['go'] == 'cadastrar'){
 	$bairro = $_POST['bairro'];
     $cep = $_POST['cep'];
     $cidade = $_POST['cidade'];
-	$uf = $_POST['uf'];
+	$estado = $_POST['estado'];
 
-	mysql_query("insert into paciente (nome, dataNascimento, sexo, cpf, rg, rua, bairro, numero, cep, cidade, uf) values 						               ('$nome','$dataNascimento', '$sexo', '$cpf', '$rg', '$rua', '$bairro', '$numero', '$cep', '$cidade', '$uf')") or die(mysql_error());;
-    
-    mysql_query("insert into paciente p onner join usuario u inner join endereco e (u.nome, u.dataNascimento, u.sexo, u.cpf, u.rg, e.rua, e.bairro, e.numero, e.cep, e.cidade) values 						               ('$nome','$dataNascimento', '$sexo', '$cpf', '$rg', '$rua', '$bairro', '$numero', '$cep', '$cidade', '$uf')") or die(mysql_error());;
-	echo "<script>alert('Usuário cadastrado com sucesso.');</script>";
-	/*echo "<meta http-equiv='refresh' content='0, url=cad_paciente.php'>"; */
+
+	$query1 = "INSERT INTO endereco (rua, bairro, numero, cep, cidade, estado) VALUES
+									('$rua', '$bairro', '$numero', '$cep', '$cidade', '$estado')";
+	mysql_query( $query1 )or die(mysql_error());;
+	
+	$id = mysql_insert_id();
+	
+	$query2 = "INSERT INTO paciente (nome, dataNascimento, sexo, fone, cpf, rg, id_endereco) VALUES 
+								   ('$nome','$dataNascimento','$sexo', '$fone', '$cpf','$rg', {$id})";
+	mysql_query( $query2 )or die(mysql_error());;
+	echo "<script>alert('Paciente cadastrado com sucesso.');</script>"; 
+	echo "<meta http-equiv='refresh' content='0, url=cad_paciente.php'>";
 }
+
 ?>
 <?php 
     if(@$_GET['go'] == 'sair'){

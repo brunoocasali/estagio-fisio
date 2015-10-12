@@ -30,6 +30,7 @@ if (!isset($_SESSION['usuario_session']) && !isset($_SESSION['senha_session'])){
 <body>
 <?php include('modulos/menu.php'); ?>
 <div class="container">
+<?php include('modulos/crumb.php'); ?>
   <h1>Marcar Consulta</h1>
   <form action="exec_cad_agenda.php" method="post" enctype="multipart/form-data" id="form1">
 <div class="row">

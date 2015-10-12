@@ -58,7 +58,7 @@ if(@$_GET['go'] == 'logar'){
     $usuario = $_POST['usuario'];
     $senha = $_POST['senha'];
     
-        $query1 = mysql_num_rows(mysql_query("SELECT * FROM LOGIN WHERE USUARIO = '$usuario' AND SENHA = '$senha'"));
+        $query1 = mysql_num_rows(mysql_query("SELECT * FROM acesso_painel WHERE USUARIO = '$usuario' AND SENHA = '$senha'"));
     
         if($query1 == 1){
         $_SESSION['usuario_session'] = $usuario;
