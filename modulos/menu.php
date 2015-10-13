@@ -8,8 +8,13 @@
         <!--<li><a href="painel.php">Início</a></li>-->
         <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pacientes<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="pesq_paciente.php">Buscar paciente</a></li>
-            <li><a href="cad_paciente.php">Efetuar cadastro</a></li>
+            <li><a href="pesq_paciente.php">Gerenciar Paciente</a></li>
+            <li><a href="cad_paciente.php">Efetuar Cadastro de Paciente</a></li>
+          </ul>
+        </li>
+         <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profissionais<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="cad_profissional.php">Efetuar Cadastro de Profissional</a></li>
           </ul>
         </li>
         <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Agenda<span class="caret"></span></a>

@@ -68,7 +68,7 @@ mysql_connect($host,$username,$password) or die("Impossível conectar ao banco."
 
 @mysql_select_db($db) or die("Impossível conectar ao banco"); 
 
-$result=mysql_query("SELECT * FROM consulta WHERE id_paciente LIKE $id") or die("Impossível executar a query"); 
+$result=mysql_query("SELECT * FROM exames WHERE id_paciente LIKE $id") or die("Impossível executar a query"); 
 
 while($row=mysql_fetch_object($result)) { 
 	

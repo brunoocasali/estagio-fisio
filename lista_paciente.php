@@ -41,7 +41,9 @@ require_once "modulos/conexao.php";
 $busca = mysql_real_escape_string($_GET['consulta']);
 $por_pagina = 5;
 $condicoes = "((`nome` LIKE '%{$busca}%') OR ('%{$busca}%'))";
+
 $sql = "SELECT COUNT(*) AS total FROM `paciente` WHERE {$condicoes}";
+
 $query = mysql_query($sql);
 $total = mysql_result($query, 0, 'total');
 $paginas =  (($total % $por_pagina) > 0) ? (int)($total / $por_pagina) + 1 : ($total / $por_pagina);

@@ -39,9 +39,21 @@ if (!isset($_SESSION['usuario_session']) && !isset($_SESSION['senha_session'])){
     <input type="text" class="form-control" name="patologia" />
     </div>
   <div class="col-md-6">
-    
+   
      <label for="profissional">Profissional:</label>
-    <input type="text" class="form-control" name="profissional" />
+    <select class="form-control" name="profissional" required id="profissional">
+              <option selected disabled>Selecionar</option>
+    
+    
+ <?php
+
+		$query = mysql_query("select u.nome from usuario u INNER JOIN fisioterapeuta f on (f.id_usuario = u.id)");
+
+  while($profissional = mysql_fetch_array($query)) { ?>
+ <option value="<?php echo $profissional['nome'] ?>"><?php echo $profissional['nome'] ?></option>
+ <?php } ?>
+    
+                    </select>
   </div>
    </div>
 <br />

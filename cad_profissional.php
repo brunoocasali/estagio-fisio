@@ -15,7 +15,7 @@ if (!isset($_SESSION['usuario_session']) && !isset($_SESSION['senha_session'])){
 <meta name="author" content="erick sutil">
 <!--<link rel="icon" href="">-->
 
-<title>Physio - Efetuar Cadastro</title>
+<title>Physio - Efetuar Cadastro de Profissional</title>
 <link href="bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 <link href="css/sticky-footer-navbar.css" rel="stylesheet">
@@ -37,8 +37,8 @@ new dgCidadesEstados(document.getElementById('estado'), document.getElementById(
 <?php include('modulos/menu.php'); ?>
 <div class="container">
 <?php include('modulos/crumb.php'); ?>
-  <h1>Efetuar Cadastro de Paciente</h1>
-  <p>Informações do Paciente</p>
+  <h1>Efetuar Cadastro de Profissional</h1>
+  <p>Informações do Fisioterapeuta</p>
   <div id="cadastro">
     <form method="post" action="?go=cadastrar">
       <div class="row">
@@ -50,8 +50,8 @@ new dgCidadesEstados(document.getElementById('estado'), document.getElementById(
         </div>
         <div class="col-xs-6 col-md-4">
           <div class="form-group">
-            <label for="profissao">Profissão:</label>
-            <input type="text" class="form-control" id="profissao" name="profissao" required>
+            <label for="profissao">Especialidade:</label>
+            <input type="text" class="form-control" id="especialidade" name="especialidade" required>
           </div>
         </div>
         <div class="col-xs-6 col-md-2">
@@ -152,7 +152,7 @@ new dgCidadesEstados(document.getElementById('estado'), document.getElementById(
 <?php
 if(@$_GET['go'] == 'cadastrar'){
     $nome = $_POST['nome'];
-	$profissao = $_POST['profissao'];
+	$especialidade = $_POST['especialidade'];
 	$dataNascimento = $_POST['dataNascimento'];
 	$sexo = $_POST['sexo'];
 	$fone = $_POST['fone'];
@@ -179,12 +179,12 @@ if(@$_GET['go'] == 'cadastrar'){
 	
 	$id = mysql_insert_id();
 	
-	$query3 = "INSERT INTO paciente (profissao, id_usuario) VALUES
-									('$profissao', {$id})";
+	$query3 = "INSERT INTO fisioterapeuta (especialidade, id_usuario) VALUES
+									('$especialidade', {$id})";
 	
 	mysql_query( $query3 ) or die(mysql_error());;
 	
-	echo "<script>alert('Paciente cadastrado com sucesso.');</script>"; 
+	echo "<script>alert('Profissional cadastrado com sucesso.');</script>"; 
 	echo "<meta http-equiv='refresh' content='0, url=cad_paciente.php'>";
 }
 

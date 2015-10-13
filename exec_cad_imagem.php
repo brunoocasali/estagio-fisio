@@ -19,7 +19,7 @@ if($imagem != NULL) {
 
 		@mysql_select_db($db) or die("Impossível Conectar"); 
 
-		mysql_query("INSERT INTO consulta (exame, id_paciente) VALUES ('$mysqlImg', '$identificacao')") or die("O sistema não foi capaz de executar a query"); 
+		mysql_query("INSERT INTO exames (exame, id_paciente) VALUES ('$mysqlImg', '$identificacao')") or die("O sistema não foi capaz de executar a query"); 
 
 		unlink($nomeFinal);    
         

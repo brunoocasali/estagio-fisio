@@ -15,7 +15,7 @@ if ($cadastrar == 1){
 	echo "ERRO";
 }
 
-echo "<script>alert('Salvou!');";
+echo "<script>alert('Consulta cadastrada com sucesso.');";
 echo "location.href='exibe_agenda.php'</script>";
 
 ?>
