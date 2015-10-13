@@ -6,8 +6,12 @@ if (!isset($_SESSION['usuario_session']) && !isset($_SESSION['senha_session'])){
 }else{
 ?>
 <?php
+
 $id = $_GET['id'];
-$sql = "SELECT * FROM paciente where id=$id;";
+
+
+$sql = "SELECT * FROM paciente p INNER JOIN usuario u on u.id = p.id_usuario where u.id = $id";
+
 $query = mysql_query($sql);
 while($sql = mysql_fetch_array($query)){
 $nome = $sql["nome"];
@@ -56,7 +60,8 @@ function UrlAtual(){
     <input type="submit" class="btn" value="Enviar"/>
   </form>
   <br />
-  <h4>Anexos:</h4>
+  
+    <h4>Anexos:</h4>
   <?php
 
 $host = "localhost";

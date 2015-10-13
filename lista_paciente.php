@@ -42,7 +42,9 @@ $busca = mysql_real_escape_string($_GET['consulta']);
 $por_pagina = 5;
 $condicoes = "((`nome` LIKE '%{$busca}%') OR ('%{$busca}%'))";
 
-$sql = "SELECT COUNT(*) AS total FROM `paciente` WHERE {$condicoes}";
+//$sql = "SELECT COUNT(*) AS total FROM `paciente` WHERE {$condicoes}";
+//$sql = "SELECT COUNT(*) AS total FROM paciente p INNER JOIN usuario u on u.id = p.id_usuario WHERE u.nome = {$condicoes}";
+$sql = "SELECT COUNT(*) AS total FROM paciente p INNER JOIN usuario u on u.id = p.id_usuario WHERE {$condicoes}";
 
 $query = mysql_query($sql);
 $total = mysql_result($query, 0, 'total');
@@ -55,7 +57,8 @@ if (isset($_GET['pagina'])) {
 $pagina = max(min($paginas, $pagina), 1);
 $offset = ($pagina - 1) * $por_pagina;
 
-$sql = "SELECT * FROM `paciente` WHERE {$condicoes} ORDER BY `nome` DESC LIMIT {$offset}, {$por_pagina}";
+//$sql = "SELECT * FROM `paciente` WHERE {$condicoes} ORDER BY `nome` DESC LIMIT {$offset}, {$por_pagina}";
+$sql = "SELECT * FROM paciente p INNER JOIN usuario u on u.id = p.id_usuario WHERE {$condicoes} ORDER BY `nome` DESC LIMIT {$offset}, {$por_pagina}";
 
 $query = mysql_query($sql);
 echo "Resultados ".min($total, ($offset + 1))." - ".min($total, ($offset + $por_pagina))." de ".$total." resultados encontrados para '".$_GET['consulta']."'";
