@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 13-Out-2015 às 19:03
+-- Generation Time: 15-Out-2015 às 06:08
 -- Versão do servidor: 5.6.26
 -- PHP Version: 5.6.12
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `acesso_painel` (
 --
 
 INSERT INTO `acesso_painel` (`id`, `usuario`, `senha`) VALUES
-(1, 'admin', 'admin');
+(1, 'admin', 'admin\r\n');
 
 -- --------------------------------------------------------
 
@@ -47,18 +47,12 @@ INSERT INTO `acesso_painel` (`id`, `usuario`, `senha`) VALUES
 
 CREATE TABLE IF NOT EXISTS `consulta` (
   `id` int(11) NOT NULL,
-  `patologia` varchar(255) NOT NULL,
+  `paciente` varchar(255) NOT NULL,
   `profissional` varchar(255) NOT NULL,
+  `patologia` varchar(255) NOT NULL,
   `data` date NOT NULL,
   `horario` time NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `consulta`
---
-
-INSERT INTO `consulta` (`id`, `patologia`, `profissional`, `data`, `horario`) VALUES
-(1, 'Dor nas costas', 'Erick Bruno Sutil', '1994-12-08', '09:40:00');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -74,15 +68,7 @@ CREATE TABLE IF NOT EXISTS `endereco` (
   `cep` varchar(255) NOT NULL,
   `cidade` varchar(255) NOT NULL,
   `estado` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `endereco`
---
-
-INSERT INTO `endereco` (`id`, `rua`, `bairro`, `numero`, `cep`, `cidade`, `estado`) VALUES
-(1, 'Rua Santo Antonio', 'Cristo Rei', 1441, '85602000', 'Francisco Beltrão', 'PR'),
-(2, 'Rua Santo Antonio', 'Cristo Rei', 1441, '85602000', 'Francisco Beltrão', 'PR');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -106,14 +92,7 @@ CREATE TABLE IF NOT EXISTS `fisioterapeuta` (
   `id` int(11) NOT NULL,
   `especialidade` varchar(255) NOT NULL,
   `id_usuario` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `fisioterapeuta`
---
-
-INSERT INTO `fisioterapeuta` (`id`, `especialidade`, `id_usuario`) VALUES
-(1, 'Quiropraxia', 1);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -125,14 +104,7 @@ CREATE TABLE IF NOT EXISTS `paciente` (
   `id` int(11) NOT NULL,
   `profissao` varchar(255) NOT NULL,
   `id_usuario` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `paciente`
---
-
-INSERT INTO `paciente` (`id`, `profissao`, `id_usuario`) VALUES
-(1, 'Do lar', 2);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -149,15 +121,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `cpf` varchar(255) NOT NULL,
   `rg` varchar(255) NOT NULL,
   `id_endereco` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `usuario`
---
-
-INSERT INTO `usuario` (`id`, `nome`, `dataNascimento`, `sexo`, `fone`, `cpf`, `rg`, `id_endereco`) VALUES
-(1, 'Erick Bruno Sutil', '1994-12-08', 'masculino', '4688389427', '08583835942', '129153580', 1),
-(2, 'Eliane Ribeiro Sutil', '0001-01-01', 'feminino', '4635241160', '123', '456', 2);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
@@ -223,12 +187,12 @@ ALTER TABLE `acesso_painel`
 -- AUTO_INCREMENT for table `consulta`
 --
 ALTER TABLE `consulta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `endereco`
 --
 ALTER TABLE `endereco`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `exames`
 --
@@ -238,17 +202,17 @@ ALTER TABLE `exames`
 -- AUTO_INCREMENT for table `fisioterapeuta`
 --
 ALTER TABLE `fisioterapeuta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `paciente`
 --
 ALTER TABLE `paciente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --

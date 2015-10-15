@@ -45,7 +45,17 @@ if (!isset($_SESSION['usuario_session']) && !isset($_SESSION['senha_session'])){
 	
 	$reg = mysql_fetch_row($resultado);
 	
-	echo "Patologia: $reg[1] <br /> Profissional: $reg[2] <br /> Data: $reg[3] <br /> Horário: $reg[4]<hr />";
+	$data =  "$reg[4]";
+	
+	echo "Paciente: $reg[1]<br />";
+	echo "Profissional: $reg[2]<br />";
+	echo "Patologia: $reg[3]<br />";
+	echo "Data: ";
+	echo date('d/m/Y', strtotime($data));
+	echo "<br />";
+	echo "Horário: $reg[5]<br />";
+	echo "<hr>";
+		  
 }
 	mysql_close($conexao);
 

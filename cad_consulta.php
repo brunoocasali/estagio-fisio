@@ -30,44 +30,52 @@ if (!isset($_SESSION['usuario_session']) && !isset($_SESSION['senha_session'])){
 <body>
 <?php include('modulos/menu.php'); ?>
 <div class="container">
-<?php include('modulos/crumb.php'); ?>
+  <?php include('modulos/crumb.php'); ?>
   <h1>Marcar Consulta</h1>
   <form action="exec_cad_agenda.php" method="post" enctype="multipart/form-data" id="form1">
-<div class="row">
-  <div class="col-md-6">
-     <label for="patologia">Patologia:</label>
-    <input type="text" class="form-control" name="patologia" />
-    </div>
-  <div class="col-md-6">
-   
-     <label for="profissional">Profissional:</label>
-    <select class="form-control" name="profissional" required id="profissional">
-              <option selected disabled>Selecionar</option>
-    
-    
- <?php
+    <div class="row">
+      <div class="col-md-6">
+        <label for="profissional">Paciente:</label>
+        <select class="form-control" name="paciente" required id="paciente">
+          <option selected disabled>Selecionar</option>
+          <?php
+
+		$query = mysql_query("select u.nome from usuario u INNER JOIN paciente f on (f.id_usuario = u.id)");
+
+  while($profissional = mysql_fetch_array($query)) { ?>
+          <option value="<?php echo $profissional['nome'] ?>"><?php echo $profissional['nome'] ?></option>
+          <?php } ?>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label for="profissional">Profissional:</label>
+        <select class="form-control" name="profissional" required id="profissional">
+          <option selected disabled>Selecionar</option>
+          <?php
 
 		$query = mysql_query("select u.nome from usuario u INNER JOIN fisioterapeuta f on (f.id_usuario = u.id)");
 
   while($profissional = mysql_fetch_array($query)) { ?>
- <option value="<?php echo $profissional['nome'] ?>"><?php echo $profissional['nome'] ?></option>
- <?php } ?>
-    
-                    </select>
-  </div>
-   </div>
-<br />
-<div class="row">
-  <div class="col-md-3">
-
-     <label for="data">Data:</label>
-    <input type="date" class="form-control" maxlength="10" name="data"/>
-</div>
-  <div class="col-md-3">
-     <label for="horario">Horário</label>
-    <input type="time" class="form-control" maxlength="10" name="horario"/>
-</div>
-</div>
+          <option value="<?php echo $profissional['nome'] ?>"><?php echo $profissional['nome'] ?></option>
+          <?php } ?>
+        </select>
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col-md-6">
+        <label for="patologia">Patologia:</label>
+        <input type="text" class="form-control" name="patologia" />
+      </div>
+      <div class="col-md-3">
+        <label for="data">Data:</label>
+        <input type="date" class="form-control" maxlength="10" name="data"/>
+      </div>
+      <div class="col-md-3">
+        <label for="horario">Horário</label>
+        <input type="time" class="form-control" maxlength="10" name="horario"/>
+      </div>
+    </div>
     <br />
     <input type="submit" class="btn center-block" name="enviar" value="Enviar" />
   </form>

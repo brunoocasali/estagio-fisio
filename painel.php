@@ -34,7 +34,7 @@ if (!isset($_SESSION['usuario_session']) && !isset($_SESSION['senha_session'])){
     <br />
     <img src="images/responsive.png" class="img-responsive center-block animated flip"> 
   <h1 class="efeito center-block" align="center">Olá!</h1> 
-  <p class="efeito center-block" align="center">Sua clínica está em suas mãos, funcional e adaptável a qualquer dispositivo, bom trabalho!</p>
+  <p class="efeito center-block" align="center">Toda a clinica em suas mãos, funcional e adaptável a qualquer dispositivo, bom trabalho!</p>
 
     </div>
 <?php include('modulos/footer.php'); ?>
